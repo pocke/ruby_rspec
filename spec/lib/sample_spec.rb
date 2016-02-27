@@ -174,6 +174,15 @@ describe GridPoints do
         is_asserted_by { grid_points.connected? == false }
       end
     end
+
+    context '2つづつのペアがある場合' do
+      let(:grid_points){ GridPoints.new(GridPoint.new(4, 5), GridPoint.new(4, 6), GridPoint.new(1, 2), GridPoint.new(1, 3)) } 
+
+      it 'false を返す' do
+        pending
+        is_asserted_by { grid_points.connected? == false }
+      end
+    end
   end
 
   describe '#count' do
