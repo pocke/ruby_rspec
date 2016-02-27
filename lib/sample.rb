@@ -36,7 +36,7 @@ class GridPoints
   class TooManyArgumentError < ArgumentError
   end
 
-  MAX_POINTS = 3
+  MAX_POINTS = 4
 
   def initialize(*points)
     @points = points
