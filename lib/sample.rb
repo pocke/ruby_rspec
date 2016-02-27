@@ -15,6 +15,11 @@ class GridPoint
     return x == val.x && y == val.y
   end
 
+  # XXX: いらない？
+  def eql?(val)
+    self == val
+  end
+
   def neighbor_of?(val)
     if x == val.x
       return y == val.y - 1 || y == val.y + 1
@@ -29,9 +34,9 @@ class GridPoints
   class SamePointError < ArgumentError
   end
 
-  def initialize(a, b, c)
-    @points = [a, b, c]
-    raise SamePointError if a == b || b == c || a == c
+  def initialize(*points)
+    @points = points
+    raise SamePointError unless points.size == points.uniq{|p|p.to_s}.size
   end
 
   def contain?(val)

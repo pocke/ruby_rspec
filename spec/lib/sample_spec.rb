@@ -41,6 +41,21 @@ describe GridPoint do
     end
   end
 
+  describe '#eql?' do
+    it '(4,7) と (4,7) は同じ座標を持つ' do
+      cloned_p4_7 = GridPoint.new(4, 7)
+      is_asserted_by{p4_7.eql?(cloned_p4_7)}
+    end
+
+    it '(4,7) と (3,8) は同じ座標を持たない' do
+      new_point = GridPoint.new(4, 7)
+      is_asserted_by{p4_7.eql?(new_point)}
+      new_point.x = 3
+      new_point.y = 8
+      is_asserted_by{p4_7.eql?(new_point) == false}
+    end
+  end
+
   describe '#neighbor_of?' do
     it '(4,7) と (3,7) は隣り合っている' do
       is_asserted_by { p4_7.neighbor_of?(GridPoint.new(3, 7)) }
@@ -76,6 +91,12 @@ describe GridPoints do
   describe '.new' do
     it '.new できる' do
       GridPoints.new(GridPoint.new(4, 7), GridPoint.new(10, 20), GridPoint.new(1, 2))
+    end
+
+    context '格子点が2つの場合' do
+      it '.new できる' do
+        GridPoints.new(GridPoint.new(4, 7), GridPoint.new(10, 20))
+      end
     end
 
     context '同じ格子点の場合' do
