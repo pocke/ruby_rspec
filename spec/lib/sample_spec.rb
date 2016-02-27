@@ -93,9 +93,21 @@ describe GridPoints do
       GridPoints.new(GridPoint.new(4, 7), GridPoint.new(10, 20), GridPoint.new(1, 2))
     end
 
+    context '格子点が1つの場合' do
+      it '例外をはく' do
+        expect { GridPoints.new(GridPoint.new(4, 7)) }.to raise_error ArgumentError
+      end
+    end
+
     context '格子点が2つの場合' do
       it '.new できる' do
         GridPoints.new(GridPoint.new(4, 7), GridPoint.new(10, 20))
+      end
+    end
+
+    context '格子点が4つの場合' do
+      it '例外をはく' do
+        expect {GridPoints.new(GridPoint.new(4, 7), GridPoint.new(10, 20), GridPoint.new(1, 2), GridPoint.new(3, 4)) }.to raise_error(GridPoints::TooManyArgumentError)
       end
     end
 
