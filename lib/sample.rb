@@ -54,5 +54,9 @@ class GridPoints
       @points.any? { |p| p.neighbor_of?(point) }
     end
   end
+
+  def count
+    @points.count
+  end
 end
 

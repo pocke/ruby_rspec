@@ -118,27 +118,28 @@ describe GridPoints do
     end
   end
 
-  let(:grid_points) { GridPoints.new(GridPoint.new(4, 7), GridPoint.new(10, 20), GridPoint.new(1, 2)) }
+  let(:two_grid_points) { GridPoints.new(GridPoint.new(4, 7), GridPoint.new(10, 20)) }
+  let(:three_grid_points) { GridPoints.new(GridPoint.new(4, 7), GridPoint.new(10, 20), GridPoint.new(1, 2)) }
 
   describe '#contain?' do
 
     context '格子点集合が、指定した格子点を含む場合' do
       it 'true を返す' do
-        is_asserted_by { grid_points.contain?(GridPoint.new(4, 7)) }
+        is_asserted_by { three_grid_points.contain?(GridPoint.new(4, 7)) }
       end
 
       it 'true を返す' do
-        is_asserted_by { grid_points.contain?(GridPoint.new(10, 20)) }
+        is_asserted_by { three_grid_points.contain?(GridPoint.new(10, 20)) }
       end
 
       it 'true を返す' do
-        is_asserted_by { grid_points.contain?(GridPoint.new(1, 2)) }
+        is_asserted_by { three_grid_points.contain?(GridPoint.new(1, 2)) }
       end
     end
 
     context '格子点集合が、指定した格子点を含まない場合' do
       it 'false を返す' do
-        is_asserted_by { grid_points.contain?(GridPoint.new(5, 7)) == false }
+        is_asserted_by { three_grid_points.contain?(GridPoint.new(5, 7)) == false }
       end
     end
   end
@@ -166,6 +167,16 @@ describe GridPoints do
       it 'false を返す' do
         is_asserted_by { grid_points.connected? == false }
       end
+    end
+  end
+
+  describe '#count' do
+    it 'GridPointが2つの場合、2を返す' do
+      is_asserted_by { two_grid_points.count == 2 }
+    end
+
+    it 'GridPointが3つの場合、3を返す' do
+      is_asserted_by { three_grid_points.count == 3 }
     end
   end
 end
