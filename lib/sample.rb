@@ -1,5 +1,4 @@
-class Sample
-  def say(greeting)
-    "#{greeting} TDD BootCamp!"
+class GridPoint
+  def initialize(x, y)
   end
 end
