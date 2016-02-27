@@ -29,13 +29,19 @@ class GridPoints
   class SamePointError < ArgumentError
   end
 
-  def initialize(a, b)
-    @points = [a, b]
-    raise SamePointError if a == b
+  def initialize(a, b, c)
+    @points = [a, b, c]
+    raise SamePointError if a == b || b == c || a == c
   end
 
   def contain?(val)
     return @points.include?(val)
+  end
+
+  def connected?
+    @points.all? do |point|
+      @points.any? { |p| p.neighbor_of?(point) }
+    end
   end
 end
 

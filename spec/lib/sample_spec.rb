@@ -75,19 +75,19 @@ end
 describe GridPoints do
   describe '.new' do
     it '.new できる' do
-      GridPoints.new(GridPoint.new(4, 7), GridPoint.new(10, 20))
+      GridPoints.new(GridPoint.new(4, 7), GridPoint.new(10, 20), GridPoint.new(1, 2))
     end
 
     context '同じ格子点の場合' do
       it '例外をはく' do
-        expect { GridPoints.new(GridPoint.new(4, 7), GridPoint.new(4, 7)) }.to raise_error(GridPoints::SamePointError)
+        expect { GridPoints.new(GridPoint.new(4, 7), GridPoint.new(4, 7), GridPoint.new(1, 2)) }.to raise_error(GridPoints::SamePointError)
       end
     end
   end
 
-  describe '#contain?' do
+  let(:grid_points) { GridPoints.new(GridPoint.new(4, 7), GridPoint.new(10, 20), GridPoint.new(1, 2)) }
 
-    let(:grid_points) { GridPoints.new(GridPoint.new(4, 7), GridPoint.new(10, 20)) }
+  describe '#contain?' do
 
     context '格子点集合が、指定した格子点を含む場合' do
       it 'true を返す' do
@@ -96,6 +96,10 @@ describe GridPoints do
 
       it 'true を返す' do
         is_asserted_by { grid_points.contain?(GridPoint.new(10, 20)) }
+      end
+
+      it 'true を返す' do
+        is_asserted_by { grid_points.contain?(GridPoint.new(1, 2)) }
       end
     end
 
@@ -106,4 +110,29 @@ describe GridPoints do
     end
   end
 
+  describe '#connected?' do
+    context '隣り合っている場合' do
+      let(:grid_points){ GridPoints.new(GridPoint.new(4, 5), GridPoint.new(4, 6), GridPoint.new(4, 7)) }
+
+      it 'true を返す' do
+        is_asserted_by { grid_points.connected? }
+      end
+    end
+
+    context '3つとも隣り合っていない場合' do
+      let(:grid_points){ GridPoints.new(GridPoint.new(4, 5), GridPoint.new(4, 7), GridPoint.new(1, 2)) }
+
+      it 'false を返す' do
+        is_asserted_by { grid_points.connected? == false }
+      end
+    end
+
+    context '2つだけ隣り合っている場合' do
+      let(:grid_points){ GridPoints.new(GridPoint.new(4, 5), GridPoint.new(4, 6), GridPoint.new(1, 2)) }
+
+      it 'false を返す' do
+        is_asserted_by { grid_points.connected? == false }
+      end
+    end
+  end
 end
