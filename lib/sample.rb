@@ -15,9 +15,10 @@ class GridPoint
     return x == val.x && y == val.y
   end
 
-  # XXX: いらない？
-  def eql?(val)
-    self == val
+  alias eql? ==
+
+  def hash
+    [x, y].hash
   end
 
   def neighbor_of?(val)
@@ -42,7 +43,7 @@ class GridPoints
     @points = points
     raise ArgumentError if points.size == 1
     raise TooManyArgumentError if points.size > MAX_POINTS
-    raise SamePointError unless points.size == points.uniq{|p|p.to_s}.size
+    raise SamePointError unless points.size == points.uniq.size
   end
 
   def contain?(val)
