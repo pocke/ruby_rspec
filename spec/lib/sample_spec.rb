@@ -113,7 +113,7 @@ describe GridPoints do
 
     context '格子点が5つの場合' do
       it '例外をはく' do
-        expect { GridPoints.new(GridPoint.new(4, 7), GridPoint.new(5, 7), GridPoint.new(1, 2), GridPoint.new(2, 2), GridPoint.new(1, 3)) }.to raise_error(GridPoints::TooManyArgumentError)
+        expect { GridPoints.new(*5.times.map{|i| GridPoint.new(i, i+1)}) }.to raise_error(GridPoints::TooManyArgumentError)
       end
     end
 
